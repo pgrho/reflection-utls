@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Shipwreck.ReflectionUtils
 {
-    public abstract class TypeValueCache<T>
+    public abstract class TypeValues<T>
     {
         private readonly Dictionary<Type, T> _Values = new Dictionary<Type, T>();
 
@@ -25,6 +25,14 @@ namespace Shipwreck.ReflectionUtils
                     _Values[type] = value = GetValueCore(type);
                 }
                 return value;
+            }
+        }
+
+        public void Clear()
+        {
+            lock (_Values)
+            {
+                _Values.Clear();
             }
         }
     }

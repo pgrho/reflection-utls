@@ -4,14 +4,14 @@ using System.Threading;
 
 namespace Shipwreck.ReflectionUtils
 {
-    public abstract class TypeCultureValueCache<T> : TypeValueCache<CultureValueCache<T>>
+    public abstract class LocalizedTypeValues<T> : TypeValues<LocalizedValues<T>>
     {
-        private sealed class CultureValueCache : CultureValueCache<T>
+        private sealed class LocalizedValues : LocalizedValues<T>
         {
-            private readonly TypeCultureValueCache<T> _Parent;
+            private readonly LocalizedTypeValues<T> _Parent;
             private readonly Type _Type;
 
-            public CultureValueCache(TypeCultureValueCache<T> parent, Type type)
+            public LocalizedValues(LocalizedTypeValues<T> parent, Type type)
             {
                 _Parent = parent;
                 _Type = type;
@@ -27,8 +27,8 @@ namespace Shipwreck.ReflectionUtils
         public T this[Type type, CultureInfo culture]
             => GetValue(type, culture);
 
-        protected sealed override CultureValueCache<T> GetValueCore(Type type)
-            => new CultureValueCache(this, type ?? throw new ArgumentNullException(nameof(type)));
+        protected sealed override LocalizedValues<T> GetValueCore(Type type)
+            => new LocalizedValues(this, type ?? throw new ArgumentNullException(nameof(type)));
 
         public new T GetValue(Type type)
             => GetValue(type, Thread.CurrentThread.CurrentCulture);

@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.Threading;
 
 namespace Shipwreck.ReflectionUtils
 {
-    public abstract class CultureValueCache<T>
+    public abstract class LocalizedValues<T>
     {
         private readonly Dictionary<CultureInfo, T> _Values = new Dictionary<CultureInfo, T>();
 
@@ -12,6 +13,9 @@ namespace Shipwreck.ReflectionUtils
             => GetValue(culture);
 
         protected abstract T GetValueCore(CultureInfo culture);
+
+        public T GetValue()
+            => GetValue(Thread.CurrentThread.CurrentCulture);
 
         public T GetValue(CultureInfo culture)
         {
@@ -28,5 +32,14 @@ namespace Shipwreck.ReflectionUtils
                 return value;
             }
         }
+
+        public void Clear()
+        {
+            lock (_Values)
+            {
+                _Values.Clear();
+            }
+        }
     }
 }
+

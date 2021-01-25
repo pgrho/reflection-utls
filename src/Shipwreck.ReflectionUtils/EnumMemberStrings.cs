@@ -7,10 +7,10 @@ using System.Text.RegularExpressions;
 
 namespace Shipwreck.ReflectionUtils
 {
-    public abstract class EnumFieldStringValueCache<TEnum> : EnumFieldValueCache<TEnum, string>
+    public abstract class EnumMemberStrings<TEnum> : EnumMemberValues<TEnum, string>
         where TEnum : struct, Enum
     {
-        public EnumFieldStringValueCache(IEqualityComparer<TEnum> enumComparer = null, IEqualityComparer<string> valueComparer = null)
+        public EnumMemberStrings(IEqualityComparer<TEnum> enumComparer = null, IEqualityComparer<string> valueComparer = null)
             : base(enumComparer, valueComparer ?? StringComparer.InvariantCultureIgnoreCase)
         {
             Bits = typeof(TEnum).GetCustomAttribute<FlagsAttribute>() != null ? (byte)(Marshal.SizeOf(typeof(TEnum).GetEnumUnderlyingType()) * 8)

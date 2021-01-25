@@ -7,7 +7,7 @@ using System.Threading;
 
 namespace Shipwreck.ReflectionUtils
 {
-    public abstract class EnumFieldValueCache<TEnum, TValue> : TypeCultureValueCache<Dictionary<TEnum, TValue>>
+    public abstract class EnumMemberValues<TEnum, TValue> : LocalizedTypeValues<Dictionary<TEnum, TValue>>
         where TEnum : Enum
     {
         protected override Dictionary<TEnum, TValue> GetValueCore(Type type, CultureInfo culture)
@@ -37,7 +37,7 @@ namespace Shipwreck.ReflectionUtils
             return dic;
         }
 
-        public EnumFieldValueCache(IEqualityComparer<TEnum> enumComparer = null, IEqualityComparer<TValue> valueComparer = null)
+        public EnumMemberValues(IEqualityComparer<TEnum> enumComparer = null, IEqualityComparer<TValue> valueComparer = null)
         {
             EnumComparer = enumComparer ?? EqualityComparer<TEnum>.Default;
             ValueComparer = valueComparer ?? EqualityComparer<TValue>.Default;

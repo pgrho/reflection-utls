@@ -6,17 +6,17 @@ using System.Reflection;
 
 namespace Shipwreck.ReflectionUtils
 {
-    public sealed class EnumDescriptionCache<TEnum> : EnumFieldStringValueCache<TEnum>
+    public sealed class EnumMemberPrompts<TEnum> : EnumMemberStrings<TEnum>
         where TEnum : struct, Enum
     {
-        public EnumDescriptionCache(IEqualityComparer<TEnum> enumComparer = null, IEqualityComparer<string> valueComparer = null)
+        public EnumMemberPrompts(IEqualityComparer<TEnum> enumComparer = null, IEqualityComparer<string> valueComparer = null)
             : base(enumComparer, valueComparer)
         {
         }
 
-        public static EnumDescriptionCache<TEnum> Default { get; } = new EnumDescriptionCache<TEnum>();
+        public static EnumMemberPrompts<TEnum> Default { get; } = new EnumMemberPrompts<TEnum>();
 
         protected override string GetValueCore(Type type, FieldInfo field, TEnum value, CultureInfo culture)
-            => field?.GetCustomAttribute<DisplayAttribute>()?.GetDescription();
+            => field?.GetCustomAttribute<DisplayAttribute>()?.GetPrompt();
     }
 }

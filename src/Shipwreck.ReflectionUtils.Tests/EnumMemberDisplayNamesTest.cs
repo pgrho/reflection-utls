@@ -4,7 +4,7 @@ using Xunit;
 
 namespace Shipwreck.ReflectionUtils
 {
-    public class EnumDisplayNameCacheTest
+    public class EnumMemberDisplayNamesTest
     {
         public enum EnumType
         {
@@ -35,7 +35,7 @@ namespace Shipwreck.ReflectionUtils
         [InlineData(EnumType.Three, "Three")]
         public void GetValueTest(EnumType enumValue, string expected)
         {
-            var cache = new EnumDisplayNameCache<EnumType>();
+            var cache = new EnumMemberDisplayNames<EnumType>();
             Assert.Equal(expected, cache.GetValue(enumValue));
             Assert.Equal(enumValue, cache.ParseValue(expected));
         }
@@ -47,7 +47,7 @@ namespace Shipwreck.ReflectionUtils
         [InlineData(FlagsType.First | FlagsType.Second, "1st,second")]
         public void GetValueTest_Flags(FlagsType enumValue, string expected)
         {
-            var cache = new EnumDisplayNameCache<FlagsType>();
+            var cache = new EnumMemberDisplayNames<FlagsType>();
             Assert.Equal(expected, cache.GetValue(enumValue));
             Assert.Equal(enumValue, cache.ParseValue(expected));
         }

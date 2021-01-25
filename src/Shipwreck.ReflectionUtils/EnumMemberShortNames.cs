@@ -6,15 +6,15 @@ using System.Reflection;
 
 namespace Shipwreck.ReflectionUtils
 {
-    public sealed class EnumShortNameCache<TEnum> : EnumFieldStringValueCache<TEnum>
+    public sealed class EnumMemberShortNames<TEnum> : EnumMemberStrings<TEnum>
         where TEnum : struct, Enum
     {
-        public EnumShortNameCache(IEqualityComparer<TEnum> enumComparer = null, IEqualityComparer<string> valueComparer = null)
+        public EnumMemberShortNames(IEqualityComparer<TEnum> enumComparer = null, IEqualityComparer<string> valueComparer = null)
             : base(enumComparer, valueComparer)
         {
         }
 
-        public static EnumShortNameCache<TEnum> Default { get; } = new EnumShortNameCache<TEnum>();
+        public static EnumMemberShortNames<TEnum> Default { get; } = new EnumMemberShortNames<TEnum>();
 
         protected override string GetValueCore(Type type, FieldInfo field, TEnum value, CultureInfo culture)
             => field?.GetCustomAttribute<DisplayAttribute>()?.GetShortName()
