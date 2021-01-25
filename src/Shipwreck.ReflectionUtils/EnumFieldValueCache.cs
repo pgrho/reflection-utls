@@ -60,6 +60,9 @@ namespace Shipwreck.ReflectionUtils
             return false;
         }
 
+        public bool TryGetValue(TEnum enumValue, out TValue value)
+            => TryGetValue(enumValue, Thread.CurrentThread.CurrentCulture, out value);
+
         public bool TryGetValue(TEnum enumValue, CultureInfo culture, out TValue value)
         {
             var d = GetValue(typeof(TEnum), culture);
@@ -78,11 +81,17 @@ namespace Shipwreck.ReflectionUtils
             }
         }
 
+        public TValue GetValue(TEnum enumValue)
+            => GetValue(enumValue, Thread.CurrentThread.CurrentCulture);
+
         public TValue GetValue(TEnum enumValue, CultureInfo culture)
             => TryGetValue(enumValue, culture, out var r) ? r
             : throw new InvalidOperationException(string.Format("Value '{0}' of {1} is not supported in {2}", enumValue, typeof(TEnum).FullName, GetType().FullName));
 
         #region TryParseValue
+
+        public bool TryParseValue(TValue value, out TEnum enumValue)
+        => TryParseValue(value, Thread.CurrentThread.CurrentCulture, out enumValue);
 
         public bool TryParseValue(TValue value, CultureInfo culture, out TEnum enumValue)
         {
@@ -104,6 +113,9 @@ namespace Shipwreck.ReflectionUtils
                 return false;
             }
         }
+
+        public TEnum ParseValue(TValue value)
+            => ParseValue(value, Thread.CurrentThread.CurrentCulture);
 
         public TEnum ParseValue(TValue value, CultureInfo culture)
             => TryParseValue(value, culture, out var r) ? r

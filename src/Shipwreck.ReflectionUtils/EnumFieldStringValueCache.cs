@@ -13,7 +13,7 @@ namespace Shipwreck.ReflectionUtils
         public EnumFieldStringValueCache(IEqualityComparer<TEnum> enumComparer = null, IEqualityComparer<string> valueComparer = null)
             : base(enumComparer, valueComparer ?? StringComparer.InvariantCultureIgnoreCase)
         {
-            Bits = typeof(TEnum).GetCustomAttribute<FlagsAttribute>() != null ? (byte)(Marshal.SizeOf(typeof(TEnum)) * 8)
+            Bits = typeof(TEnum).GetCustomAttribute<FlagsAttribute>() != null ? (byte)(Marshal.SizeOf(typeof(TEnum).GetEnumUnderlyingType()) * 8)
                 : typeof(TEnum).IsValueType ? 0
                 : 64;
         }

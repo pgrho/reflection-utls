@@ -14,6 +14,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "common", "common", "{A98C86
 		..\README.md = ..\README.md
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shipwreck.ReflectionUtils.Tests", "Shipwreck.ReflectionUtils.Tests\Shipwreck.ReflectionUtils.Tests.csproj", "{922F7535-A9BA-4BEC-A886-8BA4C7820A02}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -36,6 +38,18 @@ Global
 		{3E356078-5D45-4B73-BE23-12CD1793F9B1}.Release|x64.Build.0 = Release|Any CPU
 		{3E356078-5D45-4B73-BE23-12CD1793F9B1}.Release|x86.ActiveCfg = Release|Any CPU
 		{3E356078-5D45-4B73-BE23-12CD1793F9B1}.Release|x86.Build.0 = Release|Any CPU
+		{922F7535-A9BA-4BEC-A886-8BA4C7820A02}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{922F7535-A9BA-4BEC-A886-8BA4C7820A02}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{922F7535-A9BA-4BEC-A886-8BA4C7820A02}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{922F7535-A9BA-4BEC-A886-8BA4C7820A02}.Debug|x64.Build.0 = Debug|Any CPU
+		{922F7535-A9BA-4BEC-A886-8BA4C7820A02}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{922F7535-A9BA-4BEC-A886-8BA4C7820A02}.Debug|x86.Build.0 = Debug|Any CPU
+		{922F7535-A9BA-4BEC-A886-8BA4C7820A02}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{922F7535-A9BA-4BEC-A886-8BA4C7820A02}.Release|Any CPU.Build.0 = Release|Any CPU
+		{922F7535-A9BA-4BEC-A886-8BA4C7820A02}.Release|x64.ActiveCfg = Release|Any CPU
+		{922F7535-A9BA-4BEC-A886-8BA4C7820A02}.Release|x64.Build.0 = Release|Any CPU
+		{922F7535-A9BA-4BEC-A886-8BA4C7820A02}.Release|x86.ActiveCfg = Release|Any CPU
+		{922F7535-A9BA-4BEC-A886-8BA4C7820A02}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
