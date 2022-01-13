@@ -1,39 +1,35 @@
-﻿using System;
-using System.Collections.Generic;
+﻿namespace Shipwreck.ReflectionUtils;
 
-namespace Shipwreck.ReflectionUtils
+public abstract class TypeValues<T>
 {
-    public abstract class TypeValues<T>
+    private readonly Dictionary<Type, T> _Values = new();
+
+    public T this[Type type]
+        => GetValue(type);
+
+    protected abstract T GetValueCore(Type type);
+
+    public T GetValue(Type type)
     {
-        private readonly Dictionary<Type, T> _Values = new Dictionary<Type, T>();
-
-        public T this[Type type]
-            => GetValue(type);
-
-        protected abstract T GetValueCore(Type type);
-
-        public T GetValue(Type type)
+        if (type == null)
         {
-            if (type == null)
-            {
-                throw new ArgumentNullException(nameof(type));
-            }
-            lock (_Values)
-            {
-                if (!_Values.TryGetValue(type, out var value))
-                {
-                    _Values[type] = value = GetValueCore(type);
-                }
-                return value;
-            }
+            throw new ArgumentNullException(nameof(type));
         }
-
-        public void Clear()
+        lock (_Values)
         {
-            lock (_Values)
+            if (!_Values.TryGetValue(type, out var value))
             {
-                _Values.Clear();
+                _Values[type] = value = GetValueCore(type);
             }
+            return value;
+        }
+    }
+
+    public void Clear()
+    {
+        lock (_Values)
+        {
+            _Values.Clear();
         }
     }
 }

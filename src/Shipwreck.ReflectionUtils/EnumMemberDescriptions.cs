@@ -1,22 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Globalization;
-using System.Reflection;
+﻿namespace Shipwreck.ReflectionUtils;
 
-namespace Shipwreck.ReflectionUtils
+public sealed class EnumMemberDescriptions<TEnum> : EnumMemberStrings<TEnum>
+    where TEnum : struct, Enum
 {
-    public sealed class EnumMemberDescriptions<TEnum> : EnumMemberStrings<TEnum>
-        where TEnum : struct, Enum
+    public EnumMemberDescriptions(IEqualityComparer<TEnum> enumComparer = null, IEqualityComparer<string> valueComparer = null)
+        : base(enumComparer, valueComparer)
     {
-        public EnumMemberDescriptions(IEqualityComparer<TEnum> enumComparer = null, IEqualityComparer<string> valueComparer = null)
-            : base(enumComparer, valueComparer)
-        {
-        }
-
-        public static EnumMemberDescriptions<TEnum> Default { get; } = new EnumMemberDescriptions<TEnum>();
-
-        protected override string GetValueCore(Type type, FieldInfo field, TEnum value, CultureInfo culture)
-            => field?.GetCustomAttribute<DisplayAttribute>()?.GetDescription();
     }
+
+    public static EnumMemberDescriptions<TEnum> Default { get; } = new EnumMemberDescriptions<TEnum>();
+
+    protected override string GetValueCore(Type type, FieldInfo field, TEnum value, CultureInfo culture)
+        => field?.GetCustomAttribute<DisplayAttribute>()?.GetDescription();
 }
