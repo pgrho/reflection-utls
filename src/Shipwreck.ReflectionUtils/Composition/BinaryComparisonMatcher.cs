@@ -82,6 +82,14 @@ public readonly struct BinaryComparisonMatcher<TValue, TConverter, TValueMatcher
                     return false;
                 }
             }
+            else if (b.NodeType == ExpressionType.And || b.NodeType == ExpressionType.AndAlso)
+            {
+                return IsAlwaysMet(parameter, b.Left) || IsAlwaysMet(parameter, b.Right);
+            }
+            else if (b.NodeType == ExpressionType.Or || b.NodeType == ExpressionType.OrElse)
+            {
+                return IsAlwaysMet(parameter, b.Left) && IsAlwaysMet(parameter, b.Right);
+            }
             else
             {
                 return false;

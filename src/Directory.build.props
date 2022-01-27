@@ -1,18 +1,18 @@
 ﻿<Project>
-  <PropertyGroup>
-    <Version>0.0.3</Version>
-    <Authors>shipwreck.jp</Authors>
-    <Copyright>Copyright © 2021-2022 shipwreck.jp</Copyright>
-    <LangVersion>10.0</LangVersion>
-    <IsDeterministic>true</IsDeterministic>
-    <PackageLicenseExpression>MIT</PackageLicenseExpression>
-    <PackageProjectUrl>https://github.com/pgrho/reflection-utls</PackageProjectUrl>
-    <RepositoryUrl>https://github.com/pgrho/reflection-utls</RepositoryUrl>
-  </PropertyGroup>
-  <Target Name="PostPack"
-          AfterTargets="Pack"
-          Condition="'$(GeneratePackageOnBuild)'=='true'">
-    <Exec Command="XCOPY &quot;$(MSBuildProjectDirectory)\bin\Release\$(MSBuildProjectName).*.nupkg&quot; &quot;$(MSBuildProjectDirectory)\..\..\nuget\Release&quot; /D /C /I /Y /F"
-          ContinueOnError="WarnAndContinue"/>
-  </Target>
+    <PropertyGroup>
+        <Version>0.0.4</Version>
+        <Authors>shipwreck.jp</Authors>
+        <Copyright>Copyright © 2021-2022 shipwreck.jp</Copyright>
+        <LangVersion>10.0</LangVersion>
+        <IsDeterministic>true</IsDeterministic>
+        <PackageLicenseExpression>MIT</PackageLicenseExpression>
+        <PackageProjectUrl>https://github.com/pgrho/reflection-utls</PackageProjectUrl>
+        <RepositoryUrl>https://github.com/pgrho/reflection-utls</RepositoryUrl>
+    </PropertyGroup>
+    <Target Name="PostPack"
+            AfterTargets="Pack"
+            Condition="'$(GeneratePackageOnBuild)'=='true'">
+        <Exec Command="XCOPY &quot;$(MSBuildProjectDirectory)\bin\Release\$(MSBuildProjectName).*.nupkg&quot; &quot;$(MSBuildProjectDirectory)\..\..\nuget\Release&quot; /D /C /I /Y /F"
+              ContinueOnError="WarnAndContinue"/>
+    </Target>
 </Project>
