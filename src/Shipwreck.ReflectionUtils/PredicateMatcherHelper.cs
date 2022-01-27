@@ -29,41 +29,81 @@ public static class PredicateMatcherHelper
         where TExpressionMatcher : IPredicateMatcher
         => new(expressionMatcher, expectedName, expectedType);
 
-    #region Int64
+    #region Boolean
 
     [TargetedPatchingOptOut("")]
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static BinaryComparisonMatcher<Int64, Int64Converter, TValueMatcher> Equal<TValueMatcher>(this TValueMatcher valueMatcher, Int64 testingOperand)
+    public static BinaryComparisonMatcher<bool, BooleanConverter, TValueMatcher> Equal<TValueMatcher>(this TValueMatcher valueMatcher, bool testingOperand)
         where TValueMatcher : IPredicateMatcher
         => new(default, valueMatcher, ExpressionType.Equal, testingOperand);
 
     [TargetedPatchingOptOut("")]
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static BinaryComparisonMatcher<Int64, Int64Converter, TValueMatcher> NotEqual<TValueMatcher>(this TValueMatcher valueMatcher, Int64 testingOperand)
+    public static BinaryComparisonMatcher<bool, BooleanConverter, TValueMatcher> NotEqual<TValueMatcher>(this TValueMatcher valueMatcher, bool testingOperand)
         where TValueMatcher : IPredicateMatcher
         => new(default, valueMatcher, ExpressionType.NotEqual, testingOperand);
 
     [TargetedPatchingOptOut("")]
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static BinaryComparisonMatcher<Int64, Int64Converter, TValueMatcher> GreaterThan<TValueMatcher>(this TValueMatcher valueMatcher, Int64 testingOperand)
+    public static BinaryComparisonMatcher<bool, BooleanConverter, TValueMatcher> GreaterThan<TValueMatcher>(this TValueMatcher valueMatcher, bool testingOperand)
         where TValueMatcher : IPredicateMatcher
         => new(default, valueMatcher, ExpressionType.GreaterThan, testingOperand);
 
     [TargetedPatchingOptOut("")]
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static BinaryComparisonMatcher<Int64, Int64Converter, TValueMatcher> GreaterThanOrEqual<TValueMatcher>(this TValueMatcher valueMatcher, Int64 testingOperand)
+    public static BinaryComparisonMatcher<bool, BooleanConverter, TValueMatcher> GreaterThanOrEqual<TValueMatcher>(this TValueMatcher valueMatcher, bool testingOperand)
         where TValueMatcher : IPredicateMatcher
         => new(default, valueMatcher, ExpressionType.GreaterThanOrEqual, testingOperand);
 
     [TargetedPatchingOptOut("")]
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static BinaryComparisonMatcher<Int64, Int64Converter, TValueMatcher> LessThan<TValueMatcher>(this TValueMatcher valueMatcher, Int64 testingOperand)
+    public static BinaryComparisonMatcher<bool, BooleanConverter, TValueMatcher> LessThan<TValueMatcher>(this TValueMatcher valueMatcher, bool testingOperand)
         where TValueMatcher : IPredicateMatcher
         => new(default, valueMatcher, ExpressionType.LessThan, testingOperand);
 
     [TargetedPatchingOptOut("")]
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static BinaryComparisonMatcher<Int64, Int64Converter, TValueMatcher> LessThanOrEqual<TValueMatcher>(this TValueMatcher valueMatcher, Int64 testingOperand)
+    public static BinaryComparisonMatcher<bool, BooleanConverter, TValueMatcher> LessThanOrEqual<TValueMatcher>(this TValueMatcher valueMatcher, bool testingOperand)
+        where TValueMatcher : IPredicateMatcher
+        => new(default, valueMatcher, ExpressionType.LessThanOrEqual, testingOperand);
+
+    #endregion Boolean
+
+    #region Int64
+
+    [TargetedPatchingOptOut("")]
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public static BinaryComparisonMatcher<long, Int64Converter, TValueMatcher> Equal<TValueMatcher>(this TValueMatcher valueMatcher, long testingOperand)
+        where TValueMatcher : IPredicateMatcher
+        => new(default, valueMatcher, ExpressionType.Equal, testingOperand);
+
+    [TargetedPatchingOptOut("")]
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public static BinaryComparisonMatcher<long, Int64Converter, TValueMatcher> NotEqual<TValueMatcher>(this TValueMatcher valueMatcher, long testingOperand)
+        where TValueMatcher : IPredicateMatcher
+        => new(default, valueMatcher, ExpressionType.NotEqual, testingOperand);
+
+    [TargetedPatchingOptOut("")]
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public static BinaryComparisonMatcher<long, Int64Converter, TValueMatcher> GreaterThan<TValueMatcher>(this TValueMatcher valueMatcher, long testingOperand)
+        where TValueMatcher : IPredicateMatcher
+        => new(default, valueMatcher, ExpressionType.GreaterThan, testingOperand);
+
+    [TargetedPatchingOptOut("")]
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public static BinaryComparisonMatcher<long, Int64Converter, TValueMatcher> GreaterThanOrEqual<TValueMatcher>(this TValueMatcher valueMatcher, long testingOperand)
+        where TValueMatcher : IPredicateMatcher
+        => new(default, valueMatcher, ExpressionType.GreaterThanOrEqual, testingOperand);
+
+    [TargetedPatchingOptOut("")]
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public static BinaryComparisonMatcher<long, Int64Converter, TValueMatcher> LessThan<TValueMatcher>(this TValueMatcher valueMatcher, long testingOperand)
+        where TValueMatcher : IPredicateMatcher
+        => new(default, valueMatcher, ExpressionType.LessThan, testingOperand);
+
+    [TargetedPatchingOptOut("")]
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public static BinaryComparisonMatcher<long, Int64Converter, TValueMatcher> LessThanOrEqual<TValueMatcher>(this TValueMatcher valueMatcher, long testingOperand)
         where TValueMatcher : IPredicateMatcher
         => new(default, valueMatcher, ExpressionType.LessThanOrEqual, testingOperand);
 
