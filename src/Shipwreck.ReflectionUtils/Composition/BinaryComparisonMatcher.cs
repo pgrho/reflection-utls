@@ -37,7 +37,7 @@ public readonly struct BinaryComparisonMatcher<TValue, TConverter, TValueMatcher
                     case ExpressionType.GreaterThanOrEqual:
                     case ExpressionType.LessThan:
                     case ExpressionType.LessThanOrEqual:
-                        et = ExpressionType.Equal;
+                        et = b.NodeType;
                         break;
 
                     default:
@@ -54,7 +54,7 @@ public readonly struct BinaryComparisonMatcher<TValue, TConverter, TValueMatcher
                 {
                     case ExpressionType.Equal:
                     case ExpressionType.NotEqual:
-                        et = ExpressionType.Equal;
+                        et = b.NodeType;
                         break;
 
                     case ExpressionType.GreaterThan:
@@ -103,6 +103,32 @@ public readonly struct BinaryComparisonMatcher<TValue, TConverter, TValueMatcher
             var c = Converter.Compare(v, TestingOperand);
 
             return ExpressionTypeHelper.IsAlwaysMet(TestingComparison, et, c);
+        }
+        else if (expression is MemberExpression me
+            && me.Type == typeof(bool)
+            && typeof(TValue) == typeof(bool))
+        {
+            if (IsAlwaysMet(parameter, Expression.Equal(me, Expression.Constant(true))))
+            {
+                return true;
+            }
+        }
+        else if (expression is UnaryExpression ue
+            && (ue.NodeType == ExpressionType.Not || ue.NodeType == ExpressionType.Negate)
+            && ue.Type == typeof(bool)
+            && typeof(TValue) == typeof(bool))
+        {
+            var expected = false;
+            var te = ue.Operand;
+            while (te is UnaryExpression ute)
+            {
+                expected = !expected;
+                te = ute.Operand;
+            }
+            if (IsAlwaysMet(parameter, Expression.Equal(te, Expression.Constant(expected))))
+            {
+                return true;
+            }
         }
         else if (expression is MethodCallExpression mce
             && mce.Method.Name == nameof(ICollection<object>.Contains)
