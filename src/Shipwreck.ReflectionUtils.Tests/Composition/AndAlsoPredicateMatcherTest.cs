@@ -21,22 +21,27 @@ public class AndAlsoPredicateMatcherTest
         {
             Expression<Func<Arg, bool>> p = e => e.A == 1 && e.B == 2;
             Assert.True(matcher.IsAlwaysMet(p.Parameters[0], p.Body));
+            Assert.True(ExpressionHelper.IsAlwaysMet(p.Parameters[0], p.Body, (a, e) => matcher.IsAlwaysMet(a, e)));
         }
         {
             Expression<Func<Arg, bool>> p = e => e.A == 0 && e.B == 2;
             Assert.False(matcher.IsAlwaysMet(p.Parameters[0], p.Body));
+            Assert.False(ExpressionHelper.IsAlwaysMet(p.Parameters[0], p.Body, (a, e) => matcher.IsAlwaysMet(a, e)));
         }
         {
             Expression<Func<Arg, bool>> p = e => e.A == 1 && e.B == 0;
             Assert.False(matcher.IsAlwaysMet(p.Parameters[0], p.Body));
+            Assert.False(ExpressionHelper.IsAlwaysMet(p.Parameters[0], p.Body, (a, e) => matcher.IsAlwaysMet(a, e)));
         }
         {
             Expression<Func<Arg, bool>> p = e => e.B == 2 && e.A == 1;
             Assert.True(matcher.IsAlwaysMet(p.Parameters[0], p.Body));
+            Assert.True(ExpressionHelper.IsAlwaysMet(p.Parameters[0], p.Body, (a, e) => matcher.IsAlwaysMet(a, e)));
         }
         {
             Expression<Func<Arg, bool>> p = e => e.B == 2 && e.C == 4 && e.A == 1;
             Assert.True(matcher.IsAlwaysMet(p.Parameters[0], p.Body));
+            Assert.True(ExpressionHelper.IsAlwaysMet(p.Parameters[0], p.Body, (a, e) => matcher.IsAlwaysMet(a, e)));
         }
     }
 }

@@ -22,6 +22,11 @@ public static class ExpressionHelper
 
     public static bool IsAlwaysMet(ParameterExpression parameter, Expression condition, Func<ParameterExpression, Expression, bool> predicate)
     {
+        if (predicate(parameter, condition))
+        {
+            return true;
+        }
+
         if (condition is BinaryExpression b)
         {
             switch (b.NodeType)
@@ -35,7 +40,8 @@ public static class ExpressionHelper
                     return IsAlwaysMet(parameter, b.Left, predicate) && IsAlwaysMet(parameter, b.Right, predicate);
             }
         }
-        return predicate(parameter, condition);
+
+        return false;
     }
 
     public static bool TryGetConstant(this Expression expression, out object result)

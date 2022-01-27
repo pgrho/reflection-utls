@@ -19,10 +19,12 @@ public class BinaryComparisonMatcherTest
         {
             Expression<Func<Arg, bool>> p = e => e.Long == 1;
             Assert.True(matcher.IsAlwaysMet(p.Parameters[0], p.Body));
+            Assert.True(ExpressionHelper.IsAlwaysMet(p.Parameters[0], p.Body, (a, e) => matcher.IsAlwaysMet(a, e)));
         }
         {
             Expression<Func<Arg, bool>> p = e => e.Long != 1;
             Assert.False(matcher.IsAlwaysMet(p.Parameters[0], p.Body));
+            Assert.False(ExpressionHelper.IsAlwaysMet(p.Parameters[0], p.Body, (a, e) => matcher.IsAlwaysMet(a, e)));
         }
     }
 
@@ -33,22 +35,27 @@ public class BinaryComparisonMatcherTest
         {
             Expression<Func<Arg, bool>> p = e => e.B == true;
             Assert.True(matcher.IsAlwaysMet(p.Parameters[0], p.Body));
+            Assert.True(ExpressionHelper.IsAlwaysMet(p.Parameters[0], p.Body, (a, e) => matcher.IsAlwaysMet(a, e)));
         }
         {
             Expression<Func<Arg, bool>> p = e => e.B != true;
             Assert.False(matcher.IsAlwaysMet(p.Parameters[0], p.Body));
+            Assert.False(ExpressionHelper.IsAlwaysMet(p.Parameters[0], p.Body, (a, e) => matcher.IsAlwaysMet(a, e)));
         }
         {
             Expression<Func<Arg, bool>> p = e => e.B;
             Assert.True(matcher.IsAlwaysMet(p.Parameters[0], p.Body));
+            Assert.True(ExpressionHelper.IsAlwaysMet(p.Parameters[0], p.Body, (a, e) => matcher.IsAlwaysMet(a, e)));
         }
         {
             Expression<Func<Arg, bool>> p = e => !e.B;
             Assert.False(matcher.IsAlwaysMet(p.Parameters[0], p.Body));
+            Assert.False(ExpressionHelper.IsAlwaysMet(p.Parameters[0], p.Body, (a, e) => matcher.IsAlwaysMet(a, e)));
         }
         {
             Expression<Func<Arg, bool>> p = e => !!e.B;
             Assert.True(matcher.IsAlwaysMet(p.Parameters[0], p.Body));
+            Assert.True(ExpressionHelper.IsAlwaysMet(p.Parameters[0], p.Body, (a, e) => matcher.IsAlwaysMet(a, e)));
         }
     }
 }
