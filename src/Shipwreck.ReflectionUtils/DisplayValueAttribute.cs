@@ -3,7 +3,7 @@
 /// <summary>
 /// プロパティ値の名称を指定します。
 /// </summary>
-[AttributeUsage(AttributeTargets.Property, AllowMultiple = true)]
+[AttributeUsage(AttributeTargets.Property | AttributeTargets.Field, AllowMultiple = true)]
 public sealed class DisplayValueAttribute : DisplayAttributeBase
 {
     public DisplayValueAttribute(object value)
