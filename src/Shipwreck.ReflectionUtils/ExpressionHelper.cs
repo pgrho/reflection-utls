@@ -73,4 +73,30 @@ public static class ExpressionHelper
         result = null;
         return false;
     }
+
+    private sealed class ReplaceExpressionVisitor : ExpressionVisitor
+    {
+        private readonly Expression Current;
+
+        private readonly Expression NewValue;
+
+        public ReplaceExpressionVisitor(Expression current, Expression newValue)
+        {
+            Current = current;
+            NewValue = newValue;
+        }
+
+        public override Expression Visit(Expression node)
+        {
+            if (node != Current)
+            {
+                return base.Visit(node);
+            }
+
+            return NewValue;
+        }
+    }
+
+    public static Expression Replace(this Expression expression, Expression current, Expression newValue)
+        => new ReplaceExpressionVisitor(current, newValue).Visit(expression);
 }
