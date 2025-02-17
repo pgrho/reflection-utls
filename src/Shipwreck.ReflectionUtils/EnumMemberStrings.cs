@@ -75,6 +75,11 @@ public abstract class EnumMemberStrings<TEnum> : EnumMemberValues<TEnum, string>
 
                 foreach (var v in Split(value))
                 {
+                    if (v == value)
+                    {
+                        return false;
+                    }
+
                     var cs = v.Trim();
                     if (!string.IsNullOrEmpty(cs))
                     {
